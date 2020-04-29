@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, FlatList, Button } from 'react-native';
-import { StackActions } from 'react-navigation';
+import { StackActions, NavigationActions } from 'react-navigation';
 import { Styles } from '../../../styles';
 import CheckoutStyle from './CheckoutStyle.styles';
 import connect from 'react-redux/lib/connect/connect';
@@ -11,10 +11,10 @@ import CheckoutRow from '../../../components/CheckoutRow/CheckoutRow';
 
 const CheckoutScreen = (props) => {
   const _onPress = () => {
-    // const action = StackActions.pop({
-    //   n: 1,
-    // });
-    const action = StackActions.popToTop();
+    const action = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Home' })],
+    });
     props.navigation.dispatch(action);
     props.navigation.navigate('ThankYou');
   };
