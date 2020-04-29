@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import { PropTypes } from 'prop-types';
-import { fetchSearchList, updateCartCounter } from '../../state/actions';
+import { fetchSearchList } from '../../state/actions';
 import { Styles } from '../../styles';
 import connect from 'react-redux/lib/connect/connect';
 import ProductRow from '../../components/ProductRow/ProductRow';
@@ -17,7 +17,6 @@ class HomeScreen extends React.PureComponent {
 
   componentDidMount() {
     this.props.getListData(this.state.count);
-    // this.props.updateCartCounter(0);
   }
 
   _onPress = (item) => {
