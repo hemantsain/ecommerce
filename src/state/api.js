@@ -16,8 +16,6 @@ export const fetchListData = async () => {
     method: 'GET',
     timeout: 30 * 1000,
   });
-  console.log('Url', url);
   const result = await response.json();
-  console.log('Result', result);
   return result.products;
 };

@@ -59,7 +59,6 @@ HomeScreen.propTypes = {
   // updateCartCounter: PropTypes.func,
 };
 const mapStateToProps = (state) => {
-  console.log('State', state);
   return {
     listPostData: state.appReducer.listData,
     isLoading: state.appReducer.isLoading,
