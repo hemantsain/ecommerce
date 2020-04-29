@@ -4,26 +4,22 @@ import { View, Text } from 'react-native';
 import { Styles } from '../../../styles';
 import connect from 'react-redux/lib/connect/connect';
 import { PropTypes } from 'prop-types';
-import { updateCartCounter } from '../../../state/actions';
+import { clearCart } from '../../../state/actions';
 
 const ThankYouScreen = (props) => {
+  props.clearCart();
   return (
     <SafeAreaView style={Styles.appContainer}>
       <View style={Styles.container}>
-        <Text>Thank YOu</Text>
+        <Text style={Styles.thankYouTextStyle}>Thank You</Text>
       </View>
     </SafeAreaView>
   );
 };
 ThankYouScreen.propTypes = {
-  updateCartCounter: PropTypes.func,
-};
-const mapStateToProps = (state) => {
-  return {
-    cartCounter: state.appReducer.cartCounter,
-  };
+  clearCart: PropTypes.func,
 };
 const mapDispatchToProps = (dispatch) => ({
-  updateCartCounter: (value) => dispatch(updateCartCounter(value)),
+  clearCart: () => dispatch(clearCart()),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(ThankYouScreen);
+export default connect(null, mapDispatchToProps)(ThankYouScreen);

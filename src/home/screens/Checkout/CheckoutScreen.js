@@ -1,22 +1,24 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, FlatList, Button, TouchableOpacity } from 'react-native';
+import { View, FlatList, Button } from 'react-native';
+import { StackActions } from 'react-navigation';
 import { Styles } from '../../../styles';
 import CheckoutStyle from './CheckoutStyle.styles';
 import connect from 'react-redux/lib/connect/connect';
 import { PropTypes } from 'prop-types';
 import { updateCartCounter } from '../../../state/actions';
-import ProductRow from '../../../components/ProductRow/ProductRow';
+import CheckoutRow from '../../../components/CheckoutRow/CheckoutRow';
 
 const CheckoutScreen = (props) => {
   const _onPress = () => {
+    // const action = StackActions.pop({
+    //   n: 1,
+    // });
+    const action = StackActions.popToTop();
+    props.navigation.dispatch(action);
     props.navigation.navigate('ThankYou');
   };
-  const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => this._onPress(item)}>
-      <ProductRow id={item.sku} item={item} />
-    </TouchableOpacity>
-  );
+  const renderItem = ({ item }) => <CheckoutRow id={item.sku} item={item} />;
 
   const ItemSeparator = () => {
     return <View style={Styles.separatorStyle} />;
@@ -24,20 +26,20 @@ const CheckoutScreen = (props) => {
   return (
     <SafeAreaView style={Styles.appContainer}>
       <View style={Styles.container}>
-        <View>
-          {/* <FlatList
+        <View style={{ flex: 1 }}>
+          <FlatList
             ItemSeparatorComponent={ItemSeparator}
             data={
-              this.state.data && this.state.data.length > 0
-                ? this.state.data
-                : this.props.listPostData
+              props.cartCounter &&
+              props.cartCounter.length > 0 &&
+              props.cartCounter
             }
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
-          /> */}
-        </View>
-        <View style={CheckoutStyle.buttonContainerStyle}>
-          <Button title="Payment" onPress={_onPress} />
+          />
+          <View style={CheckoutStyle.buttonContainerStyle}>
+            <Button title="Payment" onPress={_onPress} />
+          </View>
         </View>
       </View>
     </SafeAreaView>

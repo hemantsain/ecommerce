@@ -50,17 +50,12 @@ function appReducer(state = initialState, action) {
       }
       return {
         ...state,
-        cartCounter: tempArray,
-        // state.cartCounter.length === 0
-        //   ? [...state.cartCounter, action.payload]
-        //   : state.cartCounter.map((data) => {
-        //       if (data.item.sku === action.payload.item.sku) {
-        //         return {
-        //           ...data,
-        //           number: action.payload.number,
-        //         };
-        //       }
-        //     }),
+        cartCounter: tempArray.filter((data) => data.number > 0),
+      };
+    case ActionTypes.CLEAR_CART:
+      return {
+        ...state,
+        cartCounter: [],
       };
     default:
       return state;

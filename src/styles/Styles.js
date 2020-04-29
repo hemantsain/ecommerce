@@ -39,4 +39,10 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: '#C8C8C8',
   },
+  thankYouTextStyle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: Colors.green,
+  },
 });

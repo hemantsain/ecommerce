@@ -1,29 +1,29 @@
 import React from 'react';
 import { View, Image, Text } from 'react-native';
 import Counter from 'react-native-counters';
-import ProductRowStyle from './ProductRow.styles';
+import CheckoutRowStyle from './CheckoutRowStyle.styles';
 import connect from 'react-redux/lib/connect/connect';
 import { updateCartCounter } from '../../state/actions';
 import { PropTypes } from 'prop-types';
 
-const ProductRow = (props) => {
+const CheckoutRow = (props) => {
   return (
-    <View style={ProductRowStyle.rowContainer}>
-      <View style={ProductRowStyle.itemContainer}>
+    <View style={CheckoutRowStyle.rowContainer}>
+      <View style={CheckoutRowStyle.itemContainer}>
         <Image
-          style={ProductRowStyle.imageStyle}
+          style={CheckoutRowStyle.imageStyle}
           resizeMode="contain"
-          source={{ uri: props.item.largeImage }}
+          source={{ uri: props.item.item.largeImage }}
         />
-        <View style={ProductRowStyle.textContainer}>
-          <Text>{props.item.name}</Text>
-          <Text>{props.item.onlineAvailabilityText}</Text>
-          <View style={ProductRowStyle.counterContainer}>
+        <View style={CheckoutRowStyle.textContainer}>
+          <Text>{props.item.item.name}</Text>
+          <Text>{props.item.item.onlineAvailabilityText}</Text>
+          <View style={CheckoutRowStyle.counterContainer}>
             <Counter
-              start={0}
+              start={(props.item.item && props.item.number) || 0}
               onChange={(number, type) => {
                 let data = {
-                  item: props.item,
+                  item: props.item.item,
                   number,
                 };
                 props.updateCartCounter(data);
@@ -35,7 +35,7 @@ const ProductRow = (props) => {
     </View>
   );
 };
-ProductRow.propTypes = {
+CheckoutRow.propTypes = {
   updateCartCounter: PropTypes.func,
 };
 const mapStateToProps = (state) => {
@@ -46,4 +46,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   updateCartCounter: (data) => dispatch(updateCartCounter(data)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(ProductRow);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutRow);

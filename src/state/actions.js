@@ -11,3 +11,7 @@ export const fetchMoreList = (data) => {
 export const updateCartCounter = (data) => {
   return { type: ActionTypes.UPDATE_CART_COUNTER, payload: data };
 };
+
+export const clearCart = () => {
+  return { type: ActionTypes.CLEAR_CART };
+};
